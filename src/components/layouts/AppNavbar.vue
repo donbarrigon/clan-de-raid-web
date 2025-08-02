@@ -58,7 +58,7 @@ onUnmounted(() => {
       <!-- Navegación (visible solo en escritorio) -->
       <nav class="hidden md:flex space-x-4 text-xl">
         <AppNavItem to="home">Inicio</AppNavItem>
-        <AppNavItem to="about">About</AppNavItem>
+        <AppNavItem to="inputtext">Input text</AppNavItem>
         <AppNavItem to="about">Foros</AppNavItem>
         <AppNavItem to="about">Cualquier cosa</AppNavItem>
       </nav>
