@@ -31,15 +31,14 @@
             @click="togglePasswordVisibility"
             :disabled="disabled"
           >
-            <EyeIcon v-if="showPassword" class="w-5 h-5" />
-            <EyeOffIcon v-else class="w-5 h-5" />
+            <EyeIcon v-if="showPassword" class="w-4 h-4" />
+            <EyeSlashIcon v-else class="w-4 h-4" />
           </button>
         </div>
 
         <!-- Message -->
         <div v-if="message" :class="messageClasses">
-          <LoaderIcon v-if="loading" class="w-4 h-4 animate-spin" />
-          <component v-else :is="messageIcon" class="w-4 h-4 flex-shrink-0" />
+          <component :is="messageIcon" class="w-4 h-4 flex-shrink-0" />
           <span class="flex-1">{{ message }}</span>
         </div>
       </div>
@@ -49,35 +48,8 @@
 
 <script setup>
 import { ref, computed, defineEmits, defineProps, onMounted } from 'vue'
-
-// Iconos (estos deberían importarse de tu librería de iconos, aquí uso SVG inline)
-const EyeIcon = {
-  template: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.639 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.639 0-8.573-3.007-9.963-7.178z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>`
-}
-
-const EyeOffIcon = {
-  template: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 11-4.243-4.243m4.242 4.242L9.88 9.88" /></svg>`
-}
-
-const LoaderIcon = {
-  template: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="animate-spin"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" /></svg>`
-}
-
-const CheckCircleIcon = {
-  template: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`
-}
-
-const InfoIcon = {
-  template: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" /></svg>`
-}
-
-const AlertTriangleIcon = {
-  template: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg>`
-}
-
-const AlertCircleIcon = {
-  template: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" /></svg>`
-}
+import IconSpinner from '../icons/IconSpinner.vue';
+import { EyeIcon, EyeSlashIcon, CheckCircleIcon, InformationCircleIcon, ExclamationTriangleIcon, ExclamationCircleIcon } from '@heroicons/vue/24/solid';
 
 // Props
 const props = defineProps({
@@ -149,11 +121,7 @@ const props = defineProps({
   messageType: {
     type: String,
     default: 'default',
-    validator: (value) => ['success', 'info', 'warning', 'danger', 'default'].includes(value)
-  },
-  loading: {
-    type: Boolean,
-    default: false
+    validator: (value) => ['success', 'info', 'warning', 'danger', 'loading','default'].includes(value)
   },
 
   // Props adicionales
@@ -211,53 +179,39 @@ const inputType = computed(() => {
 const messageTypes = {
   success: {
     icon: CheckCircleIcon,
-    lightColor: 'text-green-600',
-    darkColor: 'dark:text-green-400',
-    lightBg: 'bg-green-50',
-    darkBg: 'dark:bg-green-900/20',
-    lightBorder: 'border-green-200',
-    darkBorder: 'dark:border-green-800'
+    classes: 'text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800',
   },
   info: {
-    icon: InfoIcon,
-    lightColor: 'text-blue-600',
-    darkColor: 'dark:text-blue-400',
-    lightBg: 'bg-blue-50',
-    darkBg: 'dark:bg-blue-900/20',
-    lightBorder: 'border-blue-200',
-    darkBorder: 'dark:border-blue-800'
+    icon: InformationCircleIcon,
+    classes: 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800',
   },
   warning: {
-    icon: AlertTriangleIcon,
-    lightColor: 'text-yellow-600',
-    darkColor: 'dark:text-yellow-400',
-    lightBg: 'bg-yellow-50',
-    darkBg: 'dark:bg-yellow-900/20',
-    lightBorder: 'border-yellow-200',
-    darkBorder: 'dark:border-yellow-800'
+    icon: ExclamationTriangleIcon,
+    classes: 'text-yellow-600 dark:text-yellow-400 bg-yellow-50 dark:bg-yellow-900/20 border-yellow-200 dark:border-yellow-800',
   },
   danger: {
-    icon: AlertCircleIcon,
-    lightColor: 'text-red-600',
-    darkColor: 'dark:text-red-400',
-    lightBg: 'bg-red-50',
-    darkBg: 'dark:bg-red-900/20',
-    lightBorder: 'border-red-200',
-    darkBorder: 'dark:border-red-800'
+    icon: ExclamationCircleIcon,
+    classes: 'text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800',
+  },
+  loading: {
+    icon: IconSpinner,
+    classes: 'text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/20 border-indigo-200 dark:border-indigo-800',
   },
   default: {
-    icon: InfoIcon,
-    lightColor: 'text-gray-500',
-    darkColor: 'dark:text-gray-400',
-    lightBg: 'bg-gray-50',
-    darkBg: 'dark:bg-gray-800/50',
-    lightBorder: 'border-gray-200',
-    darkBorder: 'dark:border-gray-700'
+    icon: null,
+    classes: 'text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-gray-800/50 border-gray-200 dark:border-gray-700',
   }
 }
 
 const messageConfig = computed(() => messageTypes[props.messageType] || messageTypes.default)
 const messageIcon = computed(() => messageConfig.value.icon)
+const messageClasses = computed(() => {
+  const config = messageConfig.value
+  return `
+    mt-2 px-3 py-2 rounded-md border text-sm flex items-center gap-2
+    ${config.classes}
+  `.replace(/\s+/g, ' ').trim()
+})
 
 // Clases CSS con dark mode
 const containerClasses = computed(() => 'w-full')
@@ -281,7 +235,7 @@ const inputContainerClasses = computed(() => {
 
 const inputClasses = computed(() => {
   const baseClasses = `
-    w-full px-3 py-2 border rounded-md shadow-sm
+    w-full px-3 py-2 border rounded-md shadow-md
     focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
     dark:focus:ring-blue-400 dark:focus:border-blue-400
     disabled:cursor-not-allowed
@@ -306,16 +260,6 @@ const passwordToggleClasses = computed(() => `
   focus:outline-none transition-colors
   disabled:opacity-50 disabled:cursor-not-allowed
 `.replace(/\s+/g, ' ').trim())
-
-const messageClasses = computed(() => {
-  const config = messageConfig.value
-  return `
-    mt-2 px-3 py-2 rounded-md border text-sm flex items-center gap-2
-    ${config.lightColor} ${config.darkColor}
-    ${config.lightBg} ${config.darkBg}
-    ${config.lightBorder} ${config.darkBorder}
-  `.replace(/\s+/g, ' ').trim()
-})
 
 // Methods
 const handleInput = (event) => {
@@ -360,17 +304,5 @@ export default {
 </script>
 
 <style scoped>
-/* Estilos adicionales si son necesarios */
-.animate-spin {
-  animation: spin 1s linear infinite;
-}
 
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
 </style>

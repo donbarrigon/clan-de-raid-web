@@ -3,7 +3,7 @@
     :is="href ? 'a' : 'button'"
     :href="href"
     :class="buttonClasses"
-    class="inline-flex items-center gap-2 rounded-xl px-4 py-2 text-white font-semibold transition-colors duration-200 focus:outline-none disabled:opacity-50"
+    class="inline-flex items-center gap-2 rounded-xl px-4 py-3 text-white font-semibold transition-colors duration-200 focus:outline-none disabled:opacity-50"
     :disabled="loading"
   >
     <!-- Iconos -->
@@ -16,7 +16,7 @@
     <template v-else>
       <component
         :is="defaultIcon"
-        class="w-5 h-5"
+        class="w-4 h-4"
       />
     </template>
 
@@ -64,14 +64,14 @@ const buttonClasses = computed(() => {
   const map = {
   primary: 'bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] active:bg-[var(--color-primary-active)]',
   secondary: 'bg-slate-50 hover:bg-slate-200 active:bg-slate-300 text-gray-800 hover:text-gray-900 active:text-black dark:bg-slate-800 dark:hover:bg-slate-900 dark:active:bg-slate-950 dark:text-gray-100 dark:hover:text-white dark:active:text-white border-solid border-2 border-[var(--color-secondary)] transition-colors duration-300',
-  warning: 'bg-yellow-500 hover:bg-yellow-600 active:bg-yellow-700',
-  danger: 'bg-red-600 hover:bg-red-700 active:bg-red-800',
-  info: 'bg-cyan-600 hover:bg-cyan-700 active:bg-cyan-800',
-  success: 'bg-green-600 hover:bg-green-700 active:bg-green-800',
+  success: 'bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800',
   save: 'bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800',
-  edit: 'bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800',
+  warning: 'bg-yellow-500 hover:bg-yellow-600 active:bg-yellow-700',
   cancel: 'bg-gray-500 hover:bg-gray-600 active:bg-gray-700',
+  danger: 'bg-rose-600 hover:bg-rose-700 active:bg-rose-800',
   delete: 'bg-rose-600 hover:bg-rose-700 active:bg-rose-800',
+  info: 'bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800',
+  edit: 'bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800',
 }
 
   for (const key in map) {

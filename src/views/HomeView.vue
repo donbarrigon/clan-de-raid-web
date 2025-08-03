@@ -1,48 +1,51 @@
 <script setup>
 import InputButton from '../components/inputs/InputButton.vue'
-import InputText from '../components/inputs/InputText.vue'
-import { ref } from 'vue'
+import InputChip from '@/components/inputs/InputChip.vue'
 
-const email = ref('')
-const password = ref('')
-const phone = ref('')
 </script>
 
 <template>
   <h1>Home</h1>
-  <p>This is the home page1</p>
-  <p>This is the home page2</p>
-  <p>This is the home page3</p>
-  <p>This is the home page4</p>
-  <input-button primary>primary</input-button><br/>
-  <input-button secondary>secondary</input-button><br/>
-  <input-button success>success</input-button><br/>
-  <input-button save>save</input-button><br/>
-  <input-button warning>warning</input-button><br/>
-  <input-button cancel>cancel</input-button><br/>
-  <input-button edit>edit</input-button><br/>
-  <input-button danger>danger</input-button><br/>
-  <input-button delete>delete</input-button><br/>
-  <input-button info>info</input-button><br/>
-  <input-button info loading>loading</input-button><br/>
-  <input-button>boton</input-button><br/>
-  <input-button save loading>save</input-button><br/>
-
-
-  <hr />
-  <input-text label="Correo" email v-model="email" />
-  email: {{ email }}
-
-  <hr />
-  <input-text label="Contraseña" password v-model="password" />
-  password: {{ password }}
-
-  <hr />
-  <InputText
-    v-model="phone"
-    loading="true"
-    label="Teléfono"
-    messageType="info"
+  <p>This is the home page</p>
+  <input-chip
+    label="Vue.js"
+    id="1"
+    color="blue"
+    closable
+    @remove="(chip) => console.log('Removido:' + chip.id + chip.label)"
   />
+
+  <input-chip
+    label="Cargando"
+    color="red"
+    class="uppercase"
+  />
+
+  <input-chip
+    label="Aleatorio1"
+  />
+  <input-chip
+    label="Aleatorio2"
+  />
+  <input-chip
+    label="Aleatorio3"
+  />
+  <br/><br/>
+  <input-button primary>primary</input-button><br/><br/>
+  <input-button secondary>secondary</input-button><br/><br/>
+  <input-button success>success</input-button><br/><br/>
+  <input-button save>save</input-button><br/><br/>
+  <input-button warning>warning</input-button><br/><br/>
+  <input-button cancel>cancel</input-button><br/><br/>
+  <input-button edit>edit</input-button><br/><br/>
+  <input-button danger>danger</input-button><br/><br/>
+  <input-button delete>delete</input-button><br/><br/>
+  <input-button info>info</input-button><br/><br/>
+  <input-button info loading>loading</input-button><br/><br/>
+  <input-button>boton</input-button><br/><br/>
+  <input-button save loading>save</input-button><br/><br/>
+
+
+
 
 </template>

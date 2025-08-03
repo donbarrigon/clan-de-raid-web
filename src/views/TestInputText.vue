@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-white dark:bg-slate-900 transition-colors">
+  <div class="min-h-screen transition-colors">
     <div class="max-w-4xl mx-auto p-6">
       <!-- Header con toggle de dark mode -->
       <div class="flex justify-between items-center mb-8">
@@ -57,6 +57,19 @@
               message="Verifica el formato del número"
               messageType="warning"
             />
+            <input-chip
+              label = "ejemplo@correo.com"
+            />
+            <input-chip
+              label = "Verifica el formato del número"
+              closable
+            />
+            <div></div>
+            <div class="flex gap-4 justify-end">
+              <input-button save>Enviar</input-button>
+              <input-button cancel>Cancelar</input-button>
+            </div>
+
           </div>
         </section>
 
@@ -133,8 +146,7 @@
               label="Campo con carga"
               placeholder="Simulando validación..."
               message="Validando información..."
-              messageType="info"
-              :loading="isLoading"
+              messageType="loading"
             />
 
             <InputText
@@ -209,6 +221,8 @@
 <script setup>
 import { ref, reactive, computed } from 'vue'
 import InputText from '@/components/inputs/InputText.vue'
+import InputButton from '@/components/inputs/InputButton.vue'
+import InputChip from '@/components/inputs/InputChip.vue'
 
 const isDark = ref(false)
 const isLoading = ref(false)
